@@ -1,0 +1,9 @@
+*.tgz
+*.img
+*.zip
+*.nar
+*.nar.xz
+*.exe
+*.rpm
+# istersen APK'ları da dışla:
+#*.apk
