@@ -5,5 +5,20 @@
 *.nar.xz
 *.exe
 *.rpm
-# istersen APK'ları da dışla:
-#*.apk
+
+# Local/private application state
+ga-memory.jsonl
+ga-notes.json
+*.jsonl
+*.db
+*.sqlite
+*.sqlite3
+.env
+.env.*
+*.keystore
+*.jks
+*.pem
+*.p12
+*.pfx
+
+# APK artifacts are intentionally allowed in this public artifact repository.
