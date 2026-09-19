@@ -9,7 +9,10 @@ permissions:
   contents: read
 
 jobs:
-  guard:
+  central-guard:
+    uses: mehmetcerdik457-ctrl/.github/.github/workflows/reusable-privacy-guard.yml@fea0cdba87dd09c88648eb29302e65c32ba7fd44
+
+  phone-private-state:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
@@ -18,22 +21,13 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Reject private-state filenames
+      - name: Reject assistant memory and local state
         shell: bash
         run: |
           set -euo pipefail
-          forbidden='(^|/)(ga-memory\.jsonl|ga-notes\.json|\.env($|\.)|.*\.(keystore|jks|pem|p12|pfx|db|sqlite|sqlite3|jsonl))$'
+          forbidden='(^|/)(ga-memory\.jsonl|ga-notes\.json|.*\.jsonl)$'
           if git ls-files | grep -E "$forbidden"; then
-            echo "Forbidden private-state file is tracked."
+            echo "Forbidden assistant/private state is tracked."
             exit 1
           fi
-
-      - name: Scan text files for obvious credential markers
-        shell: bash
-        run: |
-          set -euo pipefail
-          if git grep -I -n -E 'BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY|ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|AKIA[0-9A-Z]{16}' -- .; then
-            echo "Potential credential material detected."
-            exit 1
-          fi
-          echo "PRIVACY_GUARD=PASS"
+          echo "PHONE_PRIVATE_STATE_GUARD=PASS"
