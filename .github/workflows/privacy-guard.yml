@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   central-guard:
-    uses: mehmetcerdik457-ctrl/.github/.github/workflows/reusable-privacy-guard.yml@fea0cdba87dd09c88648eb29302e65c32ba7fd44
+    uses: mehmetcerdik457-ctrl/.github/.github/workflows/reusable-privacy-guard.yml@328c770208878e97aa0765265b6201322fa39cd2
 
   phone-private-state:
     runs-on: ubuntu-24.04
